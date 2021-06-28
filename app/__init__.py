@@ -18,8 +18,10 @@
 from flask import Flask, abort, request
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage
 
-from . import settings
+from app import settings
+from app.receivers import receive_text_message
 
 app = Flask(__name__)
 
@@ -40,3 +42,8 @@ def callback() -> str:
         abort(400)
 
     return "OK"
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def text_message(event: MessageEvent) -> None:
+    receive_text_message(line_bot_api, event)
