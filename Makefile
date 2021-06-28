@@ -11,3 +11,6 @@ isort:
 
 mypy:
 	mypy .
+
+run:
+	python main.py --debug --port=3000
