@@ -25,7 +25,9 @@ if __name__ == "__main__":
     arg_parser.add_argument(
         "-p", "--port", type=int, default=8000, help="port"
     )
-    arg_parser.add_argument("-d", "--debug", default=False, help="debug")
+    arg_parser.add_argument(
+        "-d", "--debug", default=False, help="debug", action="store_true"
+    )
     options = arg_parser.parse_args()
 
     app.run(debug=options.debug, port=options.port)
