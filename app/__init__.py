@@ -14,7 +14,6 @@
    limitations under the License.
 """
 
-import os
 
 from flask import Flask, abort, request
 from linebot import LineBotApi, WebhookHandler
