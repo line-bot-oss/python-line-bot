@@ -29,6 +29,11 @@ line = LINE(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 
+@app.route("/", methods=["GET"])
+def index() -> str:
+    return "python-line-bot-oss hello"
+
+
 @app.route("/callback", methods=["POST"])
 def callback() -> str:
     signature = request.headers["X-Line-Signature"]
