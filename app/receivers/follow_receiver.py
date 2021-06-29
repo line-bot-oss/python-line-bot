@@ -20,10 +20,10 @@ from app.wrapper import LINE
 
 
 def follow(bot: LINE, event: FollowEvent) -> None:
-    """when followed
+    """when receive follow event
 
     Args:
-        bot (LINE): LINE Bot Client
+        bot (LINE): LINEBot Client
         event (FollowEvent): FollowEvent
     """
     bot.reply_message(event.reply_token, TextSendMessage("友達追加ありがとう！"))

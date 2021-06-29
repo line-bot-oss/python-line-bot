@@ -23,7 +23,7 @@ def unfollow(bot: LINE, event: UnfollowEvent) -> None:
     """when receive unfollow event
 
     Args:
-        bot (LINE): LINE Bot Client
+        bot (LINE): LINEBot Client
         event (UnfollowEvent): UnfollowEvent
     """
     print(f"unfollow: {event.source.user_id}")
