@@ -15,12 +15,16 @@
 """
 
 import os
-from os.path import dirname, join
+from os.path import join
 
 from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
-load_dotenv(join(dirname(os.getcwd()), ".env"))
+
+env_file = join(os.getcwd(), ".env")
+
+if os.path.exists(env_file):
+    load_dotenv(env_file)
 
 LINE_CHANNEL_ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
 LINE_CHANNEL_SECRET = os.environ["LINE_CHANNEL_SECRET"]
