@@ -14,16 +14,18 @@
    limitations under the License.
 """
 
-from linebot.api import LineBotApi
 from linebot.models import MessageEvent, TextSendMessage
 
+from app.wrapper import LINE
 
-def receive_text_message(bot: LineBotApi, event: MessageEvent) -> None:
+
+def receive_text_message(bot: LINE, event: MessageEvent) -> None:
     """when receive text message
 
     Args:
         event (MessageEvent): MessageEvent
     """
     bot.reply_message(
-        event.reply_token, TextSendMessage(text=event.message.text)
+        event.reply_token,
+        TextSendMessage(text=event.message.text),
     )
