@@ -14,18 +14,18 @@
    limitations under the License.
 """
 
-
 from flask import Flask, abort, request
-from linebot import LineBotApi, WebhookHandler
+from linebot import WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage
 
 from app import settings
 from app.receivers import receive_text_message
+from app.wrapper import LINE
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
+line = LINE(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 
@@ -46,4 +46,4 @@ def callback() -> str:
 
 @handler.add(MessageEvent, message=TextMessage)
 def text_message(event: MessageEvent) -> None:
-    receive_text_message(line_bot_api, event)
+    receive_text_message(line, event)
