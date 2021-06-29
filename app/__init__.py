@@ -17,10 +17,21 @@
 from flask import Flask, abort, request
 from linebot import WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage
+from linebot.models import (
+    FollowEvent,
+    ImageMessage,
+    MessageEvent,
+    TextMessage,
+    UnfollowEvent,
+)
 
 from app import settings
-from app.receivers import receive_text_message
+from app.receivers import (
+    follow,
+    receive_image_message,
+    receive_text_message,
+    unfollow,
+)
 from app.wrapper import LINE
 
 app = Flask(__name__)
@@ -52,3 +63,18 @@ def callback() -> str:
 @handler.add(MessageEvent, message=TextMessage)
 def text_message(event: MessageEvent) -> None:
     receive_text_message(line, event)
+
+
+@handler.add(MessageEvent, message=ImageMessage)
+def image_message(event: MessageEvent) -> None:
+    receive_image_message(line, event)
+
+
+@handler.add(FollowEvent)
+def follow_event(event: FollowEvent) -> None:
+    follow(line, event)
+
+
+@handler.add(UnfollowEvent)
+def unfollow_event(event: UnfollowEvent) -> None:
+    unfollow(line, event)
