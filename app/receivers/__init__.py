@@ -14,4 +14,6 @@
    limitations under the License.
 """
 
-from app.receivers.messages import receive_text_message
+from app.receivers.follow_receiver import follow
+from app.receivers.messages import receive_image_message, receive_text_message
+from app.receivers.unfollow_receiver import unfollow

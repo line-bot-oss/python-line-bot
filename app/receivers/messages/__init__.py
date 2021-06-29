@@ -14,4 +14,5 @@
    limitations under the License.
 """
 
+from app.receivers.messages.image_message_receiver import receive_image_message
 from app.receivers.messages.text_message_receiver import receive_text_message
