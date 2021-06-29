@@ -14,6 +14,25 @@
    limitations under the License.
 """
 
-from app.receivers.follow_receiver import follow
-from app.receivers.messages import receive_image_message, receive_text_message
-from app.receivers.unfollow_receiver import unfollow
+import os
+from os.path import join
+
+from linebot.models import MessageEvent, TextSendMessage
+
+from app.wrapper import LINE
+
+RESOUCE_DIR = "images"
+
+
+def receive_image_message(bot: LINE, event: MessageEvent) -> None:
+    """when receive image message event
+
+    Args:
+        bot (LINE): LINEBot Client
+        event (MessageEvent): MessageEvent
+    """
+    bot.save_content_from_message_id(
+        event.message.id,
+        join(os.getcwd(), RESOUCE_DIR, f"{event.message.id}.jpg"),
+    )
+    bot.reply_message(event.reply_token, TextSendMessage("保存しました。"))

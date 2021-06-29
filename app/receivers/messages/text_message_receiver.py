@@ -23,6 +23,7 @@ def receive_text_message(bot: LINE, event: MessageEvent) -> None:
     """when receive text message
 
     Args:
+        bot (LINE): LINEBot Client
         event (MessageEvent): MessageEvent
     """
     bot.reply_message(

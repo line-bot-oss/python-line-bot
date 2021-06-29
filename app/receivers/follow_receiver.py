@@ -14,6 +14,16 @@
    limitations under the License.
 """
 
-from app.receivers.follow_receiver import follow
-from app.receivers.messages import receive_image_message, receive_text_message
-from app.receivers.unfollow_receiver import unfollow
+from linebot.models import FollowEvent, TextSendMessage
+
+from app.wrapper import LINE
+
+
+def follow(bot: LINE, event: FollowEvent) -> None:
+    """when receive follow event
+
+    Args:
+        bot (LINE): LINEBot Client
+        event (FollowEvent): FollowEvent
+    """
+    bot.reply_message(event.reply_token, TextSendMessage("友達追加ありがとう！"))

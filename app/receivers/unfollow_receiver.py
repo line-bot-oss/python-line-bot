@@ -14,6 +14,16 @@
    limitations under the License.
 """
 
-from app.receivers.follow_receiver import follow
-from app.receivers.messages import receive_image_message, receive_text_message
-from app.receivers.unfollow_receiver import unfollow
+from linebot.models import UnfollowEvent
+
+from app.wrapper import LINE
+
+
+def unfollow(bot: LINE, event: UnfollowEvent) -> None:
+    """when receive unfollow event
+
+    Args:
+        bot (LINE): LINEBot Client
+        event (UnfollowEvent): UnfollowEvent
+    """
+    print(f"unfollow: {event.source.user_id}")

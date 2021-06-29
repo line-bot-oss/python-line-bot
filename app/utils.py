@@ -14,6 +14,21 @@
    limitations under the License.
 """
 
-from app.receivers.follow_receiver import follow
-from app.receivers.messages import receive_image_message, receive_text_message
-from app.receivers.unfollow_receiver import unfollow
+import json
+from os.path import dirname, join
+from typing import Dict
+
+FLEX = {"messages": [{"type": "flex", "altText": "This is a Flex Message"}]}
+RESOURCE_DIR = "resources"
+
+
+def get_flex_content(key: str) -> dict:
+    with open(
+        join(dirname(__file__), RESOURCE_DIR, "/flex.json")
+    ) as json_file:
+        flex: Dict[str, dict] = json.load(json_file)
+
+    if flex.get(key) is None:
+        raise Exception(f"Not found flex content: {key}")
+
+    return flex[key]
