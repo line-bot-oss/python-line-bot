@@ -8,6 +8,7 @@ flask = "*"
 line-bot-sdk = "*"
 python-dotenv = "*"
 gunicorn = "*"
+bs4 = "*"
 
 [dev-packages]
 mypy = "*"
